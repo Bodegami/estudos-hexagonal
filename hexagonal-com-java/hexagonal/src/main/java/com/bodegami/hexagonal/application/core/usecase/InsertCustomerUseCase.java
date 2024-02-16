@@ -5,12 +5,12 @@ import com.bodegami.hexagonal.application.ports.input.InsertCustomerInputPort;
 import com.bodegami.hexagonal.application.ports.output.FindAddressByZipCodeOutputPort;
 import com.bodegami.hexagonal.application.ports.output.InsertCustomerOutputPort;
 
-public class InsertCustomerUserCase  implements InsertCustomerInputPort {
+public class InsertCustomerUseCase implements InsertCustomerInputPort {
 
     private final FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort;
     private final InsertCustomerOutputPort insertCustomerOutputPort;
 
-    public InsertCustomerUserCase(FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort, InsertCustomerOutputPort insertCustomerOutputPort) {
+    public InsertCustomerUseCase(FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort, InsertCustomerOutputPort insertCustomerOutputPort) {
         this.findAddressByZipCodeOutputPort = findAddressByZipCodeOutputPort;
         this.insertCustomerOutputPort = insertCustomerOutputPort;
     }
