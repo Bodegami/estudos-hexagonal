@@ -4,6 +4,7 @@ import com.bodegami.hexagonal.adapters.input.controller.mapper.CustomerMapper;
 import com.bodegami.hexagonal.adapters.input.controller.request.CustomerRequest;
 import com.bodegami.hexagonal.adapters.input.controller.response.CustomerResponse;
 import com.bodegami.hexagonal.application.core.domain.Customer;
+import com.bodegami.hexagonal.application.ports.input.DeleteCustomerByIdInputPort;
 import com.bodegami.hexagonal.application.ports.input.FindCustomerByIdInputPort;
 import com.bodegami.hexagonal.application.ports.input.InsertCustomerInputPort;
 import com.bodegami.hexagonal.application.ports.input.UpdateCustomerInputPort;
@@ -25,6 +26,9 @@ public class CustomerController {
 
     @Autowired
     private UpdateCustomerInputPort updateCustomerInputPort;
+
+    @Autowired
+    private DeleteCustomerByIdInputPort deleteCustomerByIdInputPort;
 
     @Autowired
     private CustomerMapper customerMapper;
@@ -49,6 +53,12 @@ public class CustomerController {
         Customer customer = customerMapper.toCustomer(customerRequest);
         customer.setId(id);
         updateCustomerInputPort.update(customer, customerRequest.getZipCode());
+        return ResponseEntity.noContent().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteById(@PathVariable("id") final String id) {
+        deleteCustomerByIdInputPort.delete(id);
         return ResponseEntity.noContent().build();
     }
 
