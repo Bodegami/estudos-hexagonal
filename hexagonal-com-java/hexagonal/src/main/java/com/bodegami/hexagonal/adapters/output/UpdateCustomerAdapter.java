@@ -5,7 +5,9 @@ import com.bodegami.hexagonal.adapters.output.repository.mapper.CustomerEntityMa
 import com.bodegami.hexagonal.application.core.domain.Customer;
 import com.bodegami.hexagonal.application.ports.output.UpdateCustomerOutputPort;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class UpdateCustomerAdapter implements UpdateCustomerOutputPort {
 
     @Autowired
