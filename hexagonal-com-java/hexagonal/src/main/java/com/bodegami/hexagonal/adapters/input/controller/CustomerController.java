@@ -6,6 +6,7 @@ import com.bodegami.hexagonal.adapters.input.controller.response.CustomerRespons
 import com.bodegami.hexagonal.application.core.domain.Customer;
 import com.bodegami.hexagonal.application.ports.input.FindCustomerByIdInputPort;
 import com.bodegami.hexagonal.application.ports.input.InsertCustomerInputPort;
+import com.bodegami.hexagonal.application.ports.input.UpdateCustomerInputPort;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,6 +24,9 @@ public class CustomerController {
     private FindCustomerByIdInputPort findCustomerByIdInputPort;
 
     @Autowired
+    private UpdateCustomerInputPort updateCustomerInputPort;
+
+    @Autowired
     private CustomerMapper customerMapper;
 
     @PostMapping
@@ -36,6 +40,16 @@ public class CustomerController {
     public ResponseEntity<CustomerResponse> findById(@PathVariable("id") final String id) {
         Customer customer = findCustomerByIdInputPort.find(id);
         return ResponseEntity.ok(customerMapper.toCustomerResponse(customer));
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Void> update(@PathVariable("id") final String id,
+                                       @RequestBody @Valid CustomerRequest customerRequest) {
+
+        Customer customer = customerMapper.toCustomer(customerRequest);
+        customer.setId(id);
+        updateCustomerInputPort.update(customer, customerRequest.getZipCode());
+        return ResponseEntity.noContent().build();
     }
 
 }

@@ -3,10 +3,11 @@ package com.bodegami.hexagonal.application.core.usecase;
 import com.bodegami.hexagonal.application.core.domain.Address;
 import com.bodegami.hexagonal.application.core.domain.Customer;
 import com.bodegami.hexagonal.application.ports.input.FindCustomerByIdInputPort;
+import com.bodegami.hexagonal.application.ports.input.UpdateCustomerInputPort;
 import com.bodegami.hexagonal.application.ports.output.FindAddressByZipCodeOutputPort;
 import com.bodegami.hexagonal.application.ports.output.UpdateCustomerOutputPort;
 
-public class UpdateCustomerUseCase {
+public class UpdateCustomerUseCase implements UpdateCustomerInputPort {
 
     private final FindCustomerByIdInputPort findCustomerByIdInputPort;
     private final FindAddressByZipCodeOutputPort findAddressByZipCodeOutputPort;
@@ -22,6 +23,7 @@ public class UpdateCustomerUseCase {
         this.updateCustomerOutputPort = updateCustomerOutputPort;
     }
 
+    @Override
     public void update(Customer customer, String zipCode) {
         findCustomerByIdInputPort.find(customer.getId());
         Address address = findAddressByZipCodeOutputPort.find(zipCode);
