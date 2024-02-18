@@ -1,0 +1,3 @@
+1 - Abrir um terminal no diretorio do 'wiremock-standalone-3.4.0'
+2 - Executar o comando no terminal: java -jar wiremock-standalone-3.4.0.jar
+3 - Testar importando a collection do Insomnia
