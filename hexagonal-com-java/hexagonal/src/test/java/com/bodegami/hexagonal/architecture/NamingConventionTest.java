@@ -42,6 +42,29 @@ public class NamingConventionTest {
             .should()
             .resideInAPackage("..adapters.input.controller")
             .as("Controller classes should reside inside controller package in adapters.input.controller package");
-    
+
+    @ArchTest
+    public static final ArchRule should_be_suffixed_consumer = classes()
+            .that()
+            .resideInAPackage("..consumer")
+            .should()
+            .haveSimpleNameEndingWith("Consumer");
+
+    @ArchTest
+    public static final ArchRule should_be_suffixed_adapter = classes()
+            .that()
+            .resideInAPackage("..adapters.output")
+            .should()
+            .haveSimpleNameEndingWith("Adapter");
+
+    @ArchTest
+    public static final ArchRule should_be_suffixed_mapper = classes()
+            .that()
+            .resideInAPackage("..mapper")
+            .should()
+            .haveSimpleNameEndingWith("Mapper")
+            .orShould()
+            .haveSimpleNameEndingWith("MapperImpl"); //O mapper gera a implementacao, nesse caso precisamos indica-la tb nos testes
+
 
 }
